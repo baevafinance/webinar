@@ -296,6 +296,40 @@
       color: var(--text-muted);
     }
 
+    /* Блок успешного сообщения вместо формы */
+    .success-box {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .success-box__icon {
+      width: 54px;
+      height: 54px;
+      background-color: rgba(46, 125, 50, 0.1);
+      color: #2e7d32;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .success-box__title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #25062C;
+      margin-bottom: 10px;
+    }
+
+    .success-box__text {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: rgba(37, 6, 44, 0.75);
+    }
+
     .reg-form__message {
       font-size: 0.9rem;
       line-height: 1.4;
@@ -580,10 +614,11 @@
         </ul>
       </div>
 
-      <!-- ФОРМА С TELEGRAM ВМЕСТО ТЕЛЕФОНА -->
+      <!-- КАРТОЧКА ФОРМЫ / УСПЕШНОЙ ОТПРАВКИ -->
       <div class="reg-card">
-        <h3 class="reg-card__title">Заполните форму</h3>
+        <h3 class="reg-card__title" id="form-card-title">Заполните форму (test)</h3>
 
+        <!-- Сама форма -->
         <form id="reg-form" class="reg-form">
           <div class="reg-form__group">
             <label class="reg-form__label" for="reg-username">Имя <span class="reg-form__req">*</span></label>
@@ -595,7 +630,6 @@
             <input class="reg-form__input" type="email" id="reg-email" name="email" placeholder="you@example.com" required>
           </div>
 
-          <!-- Поле Telegram вместо телефона -->
           <div class="reg-form__group">
             <label class="reg-form__label" for="reg-telegram">Telegram <span class="reg-form__optional">(необязательно)</span></label>
             <input class="reg-form__input" type="text" id="reg-telegram" name="telegram" placeholder="@username">
@@ -607,6 +641,13 @@
 
           <div class="error reg-form__message"></div>
         </form>
+
+        <!-- Блок, который появляется вместо формы после успешной регистрации -->
+        <div id="success-box" class="success-box">
+          <div class="success-box__icon">✓</div>
+          <h4 class="success-box__title">Регистрация прошла успешно!</h4>
+          <p class="success-box__text">Подтвердите вашу почту по ссылке в письме, которое мы уже отправили.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -624,7 +665,7 @@
             <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
           </svg>
           <h3 class="program-item__title">Бюджет, который работает</h3>
-          <p class="program-item__text">Разберем, как распределять доход и перестать вести вечные таблицы.</p>
+          <p class="program-item__text">Оценим текущее финансовое состояние и определим слабые места.</p>
         </div>
 
         <div class="program-item">
@@ -642,7 +683,7 @@
             <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
           </svg>
           <h3 class="program-item__title">Накопления и финансовая подушка</h3>
-          <p class="program-item__text">Определим размер резерва и куда размещать свободные средства.</p>
+          <p class="program-item__text">Подберем подходящие финансовые инструменты под разные цели.</p>
         </div>
 
         <div class="program-item">
@@ -721,26 +762,48 @@
     </div>
   </footer>
 
-  <!-- СКРИПТ BIZON365 (Связка поля Telegram) -->
+<!-- СКРИПТ BIZON365 С ПРИНУДИТЕЛЬНЫМ СКРЫТИЕМ ЧЕРЕЗ СОБЫТИЕ SUBMIT -->
   <script type="text/javascript" src="https://static.bizon365.ru/form/anyform.min.js"></script>
   <script type="text/javascript">
     (function() {
-      $bizon_init_form({
-        selectors: {
-          form: '#reg-form',
-          message: '.error'
-        },
-        form_fields: {
-          email: 'input[name="email"]',
-          phone: { el: 'input[name="telegram"]', required: false }, // Передаем логин Telegram в системное поле телефона Бизона
-          username: 'input[name="username"]'
-        },
-        pageId: '210636:webinar-finblag',
-        closestDateOnly: true,
-        redirectUrl: '',
-        successMessage: 'Регистрация прошла успешно! Ссылка отправлена на почту.',
-        allowFormAction: false
-      });
+      // Инициализация Бизона
+      if (typeof $bizon_init_form === 'function') {
+        $bizon_init_form({
+          selectors: {
+            form: '#reg-form',
+            message: '.error'
+          },
+          form_fields: {
+            email: 'input[name="email"]',
+            phone: { el: 'input[name="telegram"]', required: false },
+            username: 'input[name="username"]'
+          },
+          pageId: '210636:webinar-finblag',
+          closestDateOnly: true,
+          redirectUrl: '',
+          successMessage: 'Регистрация прошла успешно! Подтвердите вашу почту по ссылке в письме.',
+          allowFormAction: false
+        });
+      }
+
+      // Принудительное скрытие формы при нажатии на кнопку отправки
+      var form = document.getElementById('reg-form');
+      if (form) {
+        form.addEventListener('submit', function() {
+          // Небольшая задержка, чтобы Бизон успел забрать данные из полей перед скрытием
+          setTimeout(function() {
+            var emailInput = document.getElementById('reg-email');
+            // Если email заполнен, считаем отправку успешной и переключаем блоки
+            if (emailInput && emailInput.value.trim() !== '') {
+              form.style.display = 'none';
+              var cardTitle = document.getElementById('form-card-title');
+              var successBox = document.getElementById('success-box');
+              if (cardTitle) cardTitle.style.display = 'none';
+              if (successBox) successBox.style.display = 'block';
+            }
+          }, 400);
+        });
+      }
     })();
   </script>
 </body>
