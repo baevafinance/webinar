@@ -524,6 +524,18 @@
       color: #ffffff;
     }
 
+    .reg-form__consent a {
+      color: var(--accent-btn);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 500;
+      transition: color 0.2s;
+      }
+
+      .reg-form__consent a:hover {
+        color: var(--accent-btn-hover);
+      }
+
     @media (max-width: 900px) {
       .reg-grid,
       .program-grid,
@@ -559,7 +571,7 @@
           <line x1="8" y1="2" x2="8" y2="6"></line>
           <line x1="3" y1="10" x2="21" y2="10"></line>
         </svg>
-        <span>6 ноября, пятница · онлайн · участие бесплатное</span>
+        <span>6 ноября, пятница 19:00 МСК · онлайн · участие бесплатное</span>
       </div>
 
       <div class="hero__actions">
@@ -585,7 +597,7 @@
               <line x1="8" y1="2" x2="8" y2="6"></line>
               <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
-            <span>пятница, 6 ноября 19:00</span>
+            <span>пятница, 6 ноября 19:00 МСК</span>
           </p>
         </div>
 
@@ -637,7 +649,7 @@
           </div>
 
           <button type="submit" class="reg-form__submit">Зарегистрироваться</button>
-          <p class="reg-form__consent">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+          <p class="reg-form__consent">Нажимая кнопку, вы соглашаетесь на <a href="https://baeva.finance/subscription/20-root/44-politica-konfidentsialnosti" target="_blank" rel="noopener noreferrer">обработку персональных данных</a></p>
 
           <div class="error reg-form__message"></div>
         </form>
@@ -646,7 +658,7 @@
         <div id="success-box" class="success-box">
           <div class="success-box__icon">✓</div>
           <h4 class="success-box__title">Регистрация прошла успешно!</h4>
-          <p class="success-box__text">Чтобы получить ссылку на эфир и уведомления подтвердите регистрацию по ссылке в письме, которое мы уже отправили.</p>
+          <p class="success-box__text">Чтобы получить ссылку на эфир и уведомления подтвердите участие по ссылке в письме.</p>
         </div>
       </div>
     </div>
