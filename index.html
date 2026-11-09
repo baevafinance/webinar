@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Как запланировать финансовое благополучие | Вебинар Кати Баевой</title>
+  <title>Чек-лист «Оценка финансового благополучия» — Катерина Баева</title>
   <style>
+    @page {
+      size: A4;
+      margin: 18mm 15mm 20mm 15mm;
+    }
+    
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -12,811 +17,1293 @@
     }
 
     :root {
-      --bg-dark: #25062C;
-      --bg-gradient: linear-gradient(160deg, #25062C 0%, #390303 100%);
-      --accent-btn: #390303;
-      --accent-btn-hover: #1f0425;
-      --text-main: #25062C;
-      --text-muted: rgba(37, 6, 44, 0.7);
-      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --primary: #390303;
+      --primary-light: #520909;
+      --accent: #b3261e;
+      --text-dark: #1f1f1f;
+      --text-muted: #555555;
+      --bg-card: #fdfbfb;
+      --border-card: #e8dede;
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
     body {
-      font-family: var(--font-family);
-      color: #ffffff;
-      background-color: var(--bg-dark);
-      line-height: 1.5;
+      font-family: var(--font-stack);
+      color: var(--text-dark);
+      background-color: #f7f7f8;
+      line-height: 1.6;
+      font-size: 13pt;
       -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    .document-container {
+      max-width: 820px;
+      margin: 30px auto;
+      background: #ffffff;
+      padding: 40px 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border-radius: 8px;
     }
 
-    .container {
-      width: min(1160px, 100% - 40px);
-      margin: 0 auto;
+    @media print {
+      body {
+        background: #ffffff;
+      }
+      .document-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+      }
     }
 
-    /* --- СЕКЦИЯ 1: HERO --- */
-    .hero {
-      padding: clamp(70px, 9vw, 120px) 0;
-      background-color: #25062C;
-      background-image: 
-        linear-gradient(160deg, rgba(37, 6, 44, 0.92) 0%, rgba(57, 3, 3, 0.88) 100%),
-        url("images/workspace.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      position: relative;
-    }
-
-    .badge {
-      display: inline-flex;
+    /* HEADER */
+    .doc-header {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 18px;
+      margin-bottom: 30px;
+    }
+
+    .doc-header img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .doc-badge {
+      background: rgba(57, 3, 3, 0.08);
+      color: var(--primary);
+      font-size: 11pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
       padding: 6px 14px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      font-size: 0.85rem;
-      margin-bottom: 24px;
+      border-radius: 4px;
     }
 
-    .badge__dot {
-      width: 7px;
-      height: 7px;
-      background-color: #ff5252;
-      border-radius: 50%;
-    }
-
-    .hero__title {
-      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
-      line-height: 1.15;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 20px;
-      max-width: 22ch;
-    }
-
-    .hero__subtitle {
-      font-size: 1.15rem;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.85);
-      margin-bottom: 28px;
-      max-width: 50ch;
-    }
-
-    .hero__meta {
+    /* INTRO */
+    .intro-section {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 36px;
-    }
-
-    .hero__actions {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .btn-white {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px 36px;
-      background: #ffffff;
-      color: var(--text-main);
-      font-weight: 700;
-      font-size: 1rem;
-      border-radius: 8px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn-white:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-    }
-
-    .hero__note {
-      font-size: 0.85rem;
-      color: rgba(255, 255, 255, 0.65);
-      max-width: 28ch;
-      line-height: 1.4;
-    }
-
-    /* --- СЕКЦИЯ 2: РЕГИСТРАЦИЯ --- */
-    .register-section {
-      padding: clamp(60px, 8vw, 100px) 0;
-      background: linear-gradient(170deg, #1f0425 0%, #2b031c 50%, #390303 100%);
-    }
-
-    .reg-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 480px);
-      gap: clamp(36px, 5vw, 70px);
-      align-items: start;
-    }
-
-    .reg-info__title {
-      font-size: clamp(1.9rem, 3.2vw, 2.6rem);
-      line-height: 1.2;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .reg-info__lead {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.85);
-      margin-bottom: 30px;
-    }
-
-    .session-box {
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      padding: 18px 22px;
-      margin-bottom: 30px;
-    }
-
-    .session-box__label {
-      font-size: 0.82rem;
-      letter-spacing: 0.05em;
-      color: rgba(255, 255, 255, 0.65);
-      margin-bottom: 6px;
-    }
-
-    .session-box__date {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.15rem;
-      font-weight: 700;
-    }
-
-    .benefits-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .benefits-list__item {
-      display: flex;
+      gap: 28px;
       align-items: flex-start;
-      gap: 12px;
-      font-size: 0.98rem;
-      color: rgba(255, 255, 255, 0.88);
-    }
+      margin-bottom: 35px;
 
-    .icon-svg {
+}
+
+    .intro-photo {
+      width: 140px;
+      height: 175px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(57, 3, 3, 0.15);
       flex-shrink: 0;
-      width: 20px;
-      height: 20px;
-      stroke: currentColor;
     }
 
-    /* Карточка формы */
-    .reg-card {
-      background: #ffffff;
-      color: var(--text-main);
-      border-radius: 18px;
-      padding: clamp(28px, 4vw, 40px);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-    }
-
-    .reg-card__title {
-      font-size: 1.45rem;
-      font-weight: 700;
-      margin-bottom: 22px;
-    }
-
-    .reg-form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .reg-form__group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .reg-form__label {
-      font-size: 0.88rem;
-      font-weight: 600;
-    }
-
-    .reg-form__req {
-      color: #B3261E;
-    }
-
-    .reg-form__optional {
-      font-size: 0.8rem;
-      font-weight: 400;
-      color: var(--text-muted);
-      margin-left: 4px;
-    }
-
-    .reg-form__input {
-      width: 100%;
-      padding: 13px 15px;
-      font-size: 0.98rem;
-      font-family: inherit;
-      border: 1px solid rgba(37, 6, 44, 0.22);
-      border-radius: 8px;
-      color: var(--text-main);
-      background: #ffffff;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .reg-form__input:focus {
-      outline: none;
-      border-color: var(--accent-btn);
-      box-shadow: 0 0 0 3px rgba(57, 3, 3, 0.12);
-    }
-
-    .reg-form__hint {
-      font-size: 0.82rem;
-      line-height: 1.4;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .reg-form__submit {
-      width: 100%;
-      margin-top: 6px;
-      padding: 14px;
-      font-size: 1rem;
-      font-weight: 700;
-      font-family: inherit;
-      color: #ffffff;
-      background-color: var(--accent-btn);
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.25s, transform 0.15s;
-    }
-
-    .reg-form__submit:hover {
-      background-color: var(--accent-btn-hover);
-      transform: translateY(-1px);
-    }
-
-    .reg-form__consent {
-      font-size: 0.78rem;
-      line-height: 1.45;
-      text-align: center;
-      color: var(--text-muted);
-    }
-
-    /* Блок успешного сообщения вместо формы */
-    .success-box {
-      display: none;
-      text-align: center;
-      padding: 20px 0;
-    }
-
-    .success-box__icon {
-      width: 54px;
-      height: 54px;
-      background-color: rgba(46, 125, 50, 0.1);
-      color: #2e7d32;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
-      font-size: 26px;
-      font-weight: bold;
-    }
-
-    .success-box__title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #25062C;
-      margin-bottom: 10px;
-    }
-
-    .success-box__text {
-      font-size: 1rem;
-      line-height: 1.5;
-      color: rgba(37, 6, 44, 0.75);
-    }
-
-    .reg-form__message {
-      font-size: 0.9rem;
-      line-height: 1.4;
-      text-align: center;
-      padding: 10px;
-      border-radius: 8px;
-    }
-
-    .reg-form__message:empty {
-      display: none;
-    }
-
-    .error {
-      color: #B3261E;
-      background-color: rgba(179, 38, 30, 0.08);
-      border: 1px solid rgba(179, 38, 30, 0.25);
-    }
-
-    /* --- СЕКЦИЯ 3: ПРОГРАММА --- */
-    .program-section {
-      padding: clamp(70px, 9vw, 110px) 0;
-      background-color: #ffffff;
-      color: var(--text-main);
-    }
-
-    .section-title {
-      font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+    .intro-content h1 {
+      font-size: 21pt;
       font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-    }
-
-    .section-lead {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      margin-bottom: 50px;
-      max-width: 60ch;
-    }
-
-    .program-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 40px 50px;
-    }
-
-    .program-item {
-      border-top: 1px solid rgba(37, 6, 44, 0.12);
-      padding-top: 24px;
-    }
-
-    .program-item__icon {
-      width: 28px;
-      height: 28px;
-      stroke: var(--text-main);
-      margin-bottom: 14px;
-    }
-
-    .program-item__title {
-      font-size: 1.25rem;
-      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.25;
       margin-bottom: 8px;
     }
 
-    .program-item__text {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: var(--text-muted);
+    .intro-content .subtitle {
+      font-size: 13pt;
+      font-weight: 600;
+      color: #666;
+      margin-bottom: 14px;
     }
 
-    /* --- СЕКЦИЯ 4: СПИКЕР --- */
-    .speaker-section {
-      padding: clamp(80px, 10vw, 130px) 0;
-      background: var(--bg-gradient);
+    .intro-content p {
+      font-size: 12pt;
+      color: var(--text-dark);
+      line-height: 1.55;
     }
 
-    .speaker-grid {
-      display: grid;
-      grid-template-columns: minmax(280px, 350px) 1fr;
-      gap: clamp(40px, 6vw, 80px);
-      align-items: center;
-    }
-
-    .speaker-photo {
-      width: 100%;
-      height: auto;
-      border-radius: 14px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-      display: block;
-    }
-
-    .speaker-role {
-      font-size: 0.88rem;
-      letter-spacing: 0.06em;
+    /* SECTION TITLE */
+    .section-heading {
+      font-size: 15pt;
+      font-weight: 800;
+      color: var(--primary);
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.03em;
+      margin: 40px 0 20px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    /* QUESTION CARD */
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      margin-bottom: 22px;
+      overflow: hidden;
+
+box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f4ecec;
+      padding: 10px 18px;
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .card-num {
+      font-size: 12pt;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .card-score {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12pt;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .score-box {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--primary);
+      background: #ffffff;
+      border-radius: 4px;
+      text-align: center;
+      line-height: 24px;
+      font-weight: 800;
+      font-size: 13pt;
+    }
+
+    .card-body {
+      padding: 18px 20px;
+    }
+
+    .question-text {
+      font-size: 13.5pt;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.45;
+      margin-bottom: 12px;
+      white-space: pre-line;
+    }
+
+    .question-list {
+      margin: 10px 0 14px 22px;
+      padding: 0;
+      list-style-type: disc;
+      white-space: normal;
+    }
+
+    .question-list li {
+      margin-bottom: 6px;
+      font-size: 12pt;
+      font-weight: 500;
+      color: #2b2b2b;
+      line-height: 1.5;
+    }
+
+    .comment-text {
+      font-size: 12pt;
+      color: #3d3d3d;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    /* RESULTS & PROMO */
+    .results-block {
+      background: #fdf8f8;
+      border: 1.5px solid var(--border-card);
+      border-left: 6px solid var(--primary);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 40px 0 25px 0;
+
+}
+
+    .results-block h2 {
+      font-size: 16pt;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+
+    .results-block p {
+      font-size: 12.5pt;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .results-block ol {
+      margin-left: 24px;
+      margin-bottom: 16px;
+      font-size: 12.5pt;
+      line-height: 1.6;
+    }
+
+    .results-block li {
+      margin-bottom: 8px;
+    }
+
+    .social-share {
+      background: #ffffff;
+      border: 1px solid var(--border-card);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin-top: 16px;
+      font-size: 12pt;
+    }
+
+    .social-share a {
+      color: var(--primary);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    /* COURSE PROMO */
+    .course-card {
+      background: linear-gradient(145deg, #390303 0%, #200101 100%);
+      color: #ffffff;
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 30px;
+
+box-shadow: 0 10px 25px rgba(57, 3, 3, 0.25);
+    }
+
+    .course-card h3 {
+      font-size: 18pt;
+      font-weight: 800;
       margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .course-card .course-date {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 11pt;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .course-card p {
+      font-size: 12pt;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .btn-buy {
+      display: inline-block;
+      background: #ffffff;
+      color: var(--primary);
+      font-size: 13pt;
+      font-weight: 800;
+      padding: 14px 34px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-buy:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    }
+
+    /* CONTACTS */
+    .contacts-footer {
+      background: #f7f7f8;
+      border-top: 2px solid var(--border-card);
+      padding: 24px;
+      border-radius: 6px;
+      margin-top: 30px;
+
+}
+
+    .contacts-footer h4 {
+      font-size: 13pt;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      font-size: 11.5pt;
+    }
+
+    .contacts-grid a {
+      color: var(--primary);
+      text-decoration: none;
       font-weight: 600;
     }
 
-    .speaker-name {
-      font-size: clamp(2rem, 3.2vw, 2.7rem);
+    .contacts-grid a:hover {
+      text-decoration: underline;
+    }
+  
+    /* INTERACTIVE CHECKLIST STYLES */
+    .card-score {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11.5pt;
+      font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      user-select: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(57, 3, 3, 0.15);
+      transition: all 0.2s ease;
+    }
+
+    .card-score:hover {
+      background: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 6px rgba(57, 3, 3, 0.1);
+    }
+
+    .score-checkbox {
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      accent-color: var(--primary);
+      margin: 0;
+    }
+
+    .score-box {
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      border: 2px solid var(--primary);
+      background: #ffffff;
+      border-radius: 4px;
+      text-align: center;
+      line-height: 22px;
       font-weight: 800;
-      margin-bottom: 24px;
+      font-size: 12pt;
+      color: var(--primary);
+      transition: all 0.2s ease;
     }
 
-    .speaker-bio {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: rgba(255, 255, 255, 0.85);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      max-width: 58ch;
+    .question-card {
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.15s;
     }
 
-    /* --- СЕКЦИЯ 5: ШАГИ --- */
-    .steps-section {
-      padding: clamp(70px, 9vw, 110px) 0;
-      background-color: #ffffff;
-      color: var(--text-main);
+    .question-card.is-checked {
+      border-color: var(--primary);
+      box-shadow: 0 4px 16px rgba(57, 3, 3, 0.12);
     }
 
-    .steps-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(40px, 6vw, 70px);
-      align-items: center;
+    .question-card.is-checked .card-top {
+      background: #faeaea;
     }
 
-    .steps-list {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    .step-item {
-      display: flex;
-      gap: 20px;
-    }
-
-    .step-num {
-      flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background-color: var(--accent-btn);
+    .question-card.is-checked .score-box {
+      background: var(--primary);
       color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 1rem;
     }
 
-    .step-title {
-      font-size: 1.15rem;
+    /* SUMMARY SCORE BLOCK */
+    .score-summary-card {
+      background: linear-gradient(135deg, #ffffff 0%, #fdf6f6 100%);
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      padding: 30px;
+      margin: 40px 0 25px 0;
+      box-shadow: 0 8px 24px rgba(57, 3, 3, 0.08);
+      position: relative;
+    }
+
+    .score-summary-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 10.5pt;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .score-summary-flex {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .score-number-wrapper {
+      text-align: center;
+      background: #fbf2f2;
+      border: 1.5px solid rgba(57, 3, 3, 0.2);
+      border-radius: 10px;
+      padding: 16px 24px;
+      min-width: 150px;
+      flex-shrink: 0;
+    }
+
+    .score-big-num {
+      font-size: 34pt;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .score-max-num {
+      font-size: 16pt;
+      font-weight: 700;
+      color: #777777;
+    }
+
+    .score-points-word {
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .score-details-wrapper {
+      flex-grow: 1;
+    }
+
+    .score-progress-bar-bg {
+      width: 100%;
+      height: 12px;
+      background: #e6dada;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .score-progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #b3261e 0%, #390303 100%);
+      width: 0%;
+      transition: width 0.35s ease;
+    }
+
+    .score-status-title {
+      font-size: 14pt;
+      font-weight: 800;
+      color: var(--primary);
       margin-bottom: 6px;
     }
 
-    .step-desc {
-      font-size: 0.95rem;
-      line-height: 1.55;
-      color: var(--text-muted);
+    .score-status-desc {
+      font-size: 11.5pt;
+      color: #444444;
+      line-height: 1.5;
     }
 
-    .steps-img {
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-      border-radius: 16px;
-      background-color: #f0f0f0;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    .score-actions-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(57, 3, 3, 0.15);
+      padding-top: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    /* --- ПОДВАЛ --- */
-    .footer {
-      padding: 40px 0;
-      background-color: #0b020d;
-      font-size: 0.82rem;
-      color: rgba(255, 255, 255, 0.45);
-      text-align: center;
+    .score-btn-reset {
+      background: transparent;
+      border: 1px solid #999999;
+      color: #666666;
+      font-size: 10.5pt;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .footer a {
-      color: rgba(255, 255, 255, 0.65);
-      margin: 0 10px;
-      transition: color 0.2s;
+    .score-btn-reset:hover {
+      background: #f0f0f0;
+      color: #222222;
+      border-color: #555555;
     }
 
-    .footer a:hover {
-      color: #ffffff;
+    .score-btn-jump {
+      background: var(--primary);
+      color: #ffffff !important;
+      font-size: 11pt;
+      font-weight: 700;
+      padding: 9px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
     }
 
-    .reg-form__consent a {
-      color: var(--accent-btn);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      font-weight: 500;
-      transition: color 0.2s;
+    .score-btn-jump:hover {
+      background: #520909;
+      transform: translateY(-1px);
+    }
+
+    /* FLOATING BOTTOM BAR */
+    .floating-score-bar {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ffffff;
+      border: 2px solid var(--primary);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      border-radius: 30px;
+      padding: 8px 16px 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      z-index: 1000;
+      transition: all 0.2s ease;
+    }
+
+    .floating-score-content {
+      font-size: 11.5pt;
+      color: #222;
+    }
+
+    .floating-score {
+      font-size: 13pt;
+      color: var(--primary);
+      font-weight: 800;
+      margin-left: 4px;
+    }
+
+    .floating-btn {
+      background: var(--primary);
+      color: #ffffff !important;
+      font-size: 10.5pt;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+    }
+
+    .floating-btn:hover {
+      background: #520909;
+    }
+
+    /* HIGHLIGHTED RECOMMENDATION */
+    .highlighted-rec {
+      background: #faeaea;
+      border-left: 4px solid var(--primary);
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 600px) {
+      .score-summary-flex {
+        flex-direction: column;
+        align-items: stretch;
       }
-
-      .reg-form__consent a:hover {
-        color: var(--accent-btn-hover);
+      .score-number-wrapper {
+        min-width: auto;
       }
-
-    @media (max-width: 900px) {
-      .reg-grid,
-      .program-grid,
-      .speaker-grid,
-      .steps-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .speaker-photo {
-        max-width: 320px;
-        margin: 0 auto;
+      .floating-score-bar {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        justify-content: space-between;
       }
     }
+    @media (max-width: 600px) {
+  /* 1. Убираем лишние боковые отступы контейнера, чтобы карточки были во всю ширину экрана */
+  body {
+    font-size: 11pt;
+  }
+
+  .document-container {
+    margin: 0 auto;
+    padding: 16px 10px;
+    border-radius: 0;
+    box-shadow: none;
+    max-width: 100%;
+  }
+
+  /* Карточки вопросов занимают максимум полезной ширины */
+  .question-card {
+    margin-bottom: 14px;
+    border-radius: 8px;
+  }
+
+  .card-top {
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .card-num {
+    font-size: 11pt;
+  }
+
+  .card-score {
+    font-size: 10pt;
+    padding: 3px 8px;
+    gap: 6px;
+  }
+
+  .score-checkbox {
+    width: 18px;
+    height: 18px;
+  }
+
+  .score-box {
+    width: 22px;
+    height: 22px;
+    line-height: 18px;
+    font-size: 10.5pt;
+  }
+
+  .card-body {
+    padding: 14px 12px;
+  }
+
+  .question-text {
+    /*font-size: 13.5pt;*/
+    margin-bottom: 8px;
+  }
+
+  /*.comment-text {
+    font-size: 12pt;
+  }*/
+
+  .question-list {
+    margin: 8px 0 10px 18px;
+  }
+
+  .question-list li {
+    font-size: 10pt;
+    margin-bottom: 4px;
+  }
+
+  /* 2. Адаптация вступительного блока: фото уменьшается на 65% и обтекается текстом */
+  .intro-section {
+    display: block; /* отключаем flex, чтобы текст естественно обтекал фото */
+    margin-bottom: 24px;
+  }
+
+  .intro-photo {
+    float: left; /* включаем обтекание текстом */
+    width: 94px; /* уменьшение на 65%: 140px * 0.35 = 91px */
+    height: auto;
+    aspect-ratio: 140 / 175;
+    margin: 0 14px 10px 0;
+    border-radius: 8px;
+  }
+
+  .intro-content {
+    display: block;
+  }
+
+  .intro-content h1 {
+    font-size: 15pt;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+
+  .intro-content .subtitle {
+    font-size: 10.5pt;
+    margin-bottom: 10px;
+    line-height: 1.35;
+  }
+
+  .intro-content p {
+    /*font-size: 10pt;*/
+    line-height: 1.5;
+  }
+
+  /* Шапка на мобильных */
+  .doc-header {
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+
+  .doc-header img {
+    height: 38px;
+  }
+
+  .doc-badge {
+    font-size: 8.5pt;
+    padding: 4px 8px;
+  }
+
+  .section-heading {
+    font-size: 12pt;
+    margin: 24px 0 14px 0;
+  }
+
+  /* Итоговый блок и плавающий счетчик */
+  .score-summary-card {
+    padding: 16px 14px;
+    margin: 25px 0 20px 0;
+  }
+
+  .score-summary-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .score-number-wrapper {
+    min-width: auto;
+    padding: 10px;
+  }
+
+  .score-big-num {
+    font-size: 26pt;
+  }
+
+  .floating-score-bar {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    justify-content: space-between;
+    padding: 6px 14px;
+  }
+}
+
   </style>
 </head>
 <body>
 
-  <!-- 1. HERO -->
-  <header class="hero">
-    <div class="container">
-      <div class="badge">
-        <span class="badge__dot"></span>
-        Бесплатный онлайн-вебинар
+  <div class="document-container">
+    
+    <!-- HEADER -->
+    <header class="doc-header">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPIAAABbCAMAAAB+pSiwAAADAFBMVEUAAAD///85AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwM5AwN37mw1AAAA/3RSTlMAAAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmhpamtsbW5vcHFyc3R1dnd4eXp7fH1+f4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f4g29TUAAAPM0lEQVR42u2ceVxU1R7Az5sBBnAFFUFDxSVRTAVF07SaUnlWLvjUyrXBJTUr1PSVPcrU0jSVQntY+p4+l9BUJis1NXPfngui5I4T4pIgDYsgMMzvnXPuPXfuvXPvLMX7vOHz5vcHc+dsc7/3nuW3nAP60/+dIC+yF9mL7EX2InuRvcheZA9ARuoSNjRp3SmT2QIWs+nUuqRhYcg9MVGJijuM0OEUkhCVSf4mmEaSj8z55G+PHQj5z8uBwg3hKG0cTqhzaRdJT/xC2tYK06OkAdzelW/7ocev1COJfz7jg+t02FkIebsGItT4HwWQPdsPhZOfPTtDw1d1FVnbb3kWyOXn5XE+biDD89FYAuNNmN46ASdEm0nyhW9Pkw+zdRj+q89APrvP9GkYszYF7U/ECZMPFvTAH3OMkqYal+xMJg1AdPSTSQ8ma7MnktStyaROdmrroMjxA1DI9W2dg57N2KaJwKWih+W+7xZy5Me3QFluLWrnOnIE/aDI80q788j6m/XMBMo8tziKIo+9SV+ZlkPOik9eb4/8t83dC+sQZPpyy0JnnyDPoTKK1LHGcmU+/4G814b5L0bQUkMK3ECOSbPaGAtN5zOyfimyJVg3x7iK3DsiIqIRh6z/680QDnnLeyhlA0GOXni5HkHezl4HQX7mtm9Ueagc2Te3D8qYxJDRBUNYZUeEZhykddLzVk5+XIfQvedo5pJNHHKMxWXkNtsYXNbKV2KD+dTgnobUKywj/VHXkIvMZvPnPLJm6z4fghz+sCnqWBFKkH32pmsw8imDCHnrXPyZJEceekWDpmRpGLLxbbR1GUIXR9I6fiNWZ1TmJ2ghimYm7ueQlx52Edl/TjmHdWRaczuG8DdPc5kVH/i72bH1qO7FTwjyPMJy9D2CjBrlvEPe8ns25PDyZgiNzPWVIf80A6G6xc8w5MwEFJfv3yvfn3tMWGpNr2zwK/eWl6VFgNFoPHPnMdeQo85RpLLVnVUwOqyuoCUyO7qLjNoXfWhGul9/w9Np4S0/goy6lX5ExnJdYSzPt+DcXBguRe4Ad3ByeTqP3LcsFGmzh69eggRkVAuiuLEcQsaywWD4ZTxyCXlsGcGxrAp3ANI81UKfisFdZDTUakajr5NZvEveixQZTQA8Y+8627dRzNrP8O3r7o0n2X8/gOb8RC6idbSF1C3kerClOZmxe71TNBWnzT5WHEmRNYuGt2/y2D8v+4SYtkUHx53frqUde+jd+i4gaxbTF3gsyglK9DFabqmzBcvEPTm6LpM5Gs3LRJum0LSk9SiT/kwKXpd1c3PAvI6syy8c1ZLECFOrRG5Rpy0EXOhOK32TSNblq9/1p0pD9hbykTYucFlWGRSlt8RJeF2+kaTD6zLJ2fK2c2TdRgLyMFHr9PVpptHevVmHaoKoI+u2EwxTrEvNxF4nhbfrajSyhr7jww1dbCf4AH3PPjUZmY7jHbVcbojrFEtrMPJYAvC9Ox3VjzIbaixyFFmdjtZyqykd6dtlnWoosj/RQG40cLOtYDKHZfrXTOQ5+N7Lu7ndWDeyVs2tkchtiF497Xe0No3o221rIjKxnU5of0drGqKHpddA5BiiVyubCXXa9BgQP9JgGDboicjaSron0bdjah5yGr7t1fKCTQZ9kHa6UOoR2bdgcB1ZsVSc/rWaWQEm0cMpg/LunoIciX0gFRLjOGzM2psqjqDyncP9JHYVnsGs7ZwjB+HZ/TWPecsfS19y09cPWcGR3J4s1lhW45RFTpE1RoCNHtOxtbdEw9Fn4Hdi3ntZe4wb1qz5eu/FcjH0hVix+Y57vI8z5FnYrSQeE5pVRuNb9Gq+USqPI/SF+Du29Guz66+WxAdy9ZcZjXhqaWk0fqwR2sQtCdeBW4zGUarI/ch0zRd84xehAx9PHtO1ru0efdpP/OahwFw5yZZDfENxTpCftkCJxAqPI4pbI+r9kfWheGxni79jX26Q6GvOYFo/AyCIeP/EagFuSbieQor6qiEvx7nTKfDb9/h2b6YMUNI9Q+YUCz+9QEh9E39b7hg57C7ACEnWbtIG9Wwm7ydyHCCfXuzvTZCrMgSZSZG5zONmXCtBigyjFJC1V0nOaDVk4qFvhUsl8K7r4i+eUl2im+4RmN8VfIDEp+8Q2QffzApJTif8lK5CXqCQEAFg65UmMEtKBwmZftOroDxCilze2x55CEBSMZxTQQ4j3luEup7gSK5OredoKvD5UnBnP8fSyBMNc4SM58eTUhttHVjCce+Y5C4yQh8CLBYj3wHIa2mHfATuB6YA9FNGHopveFXAAgsXgXnZmQ6m2cqYb9YVLc3DlJEt1IEFUCB1EIdXwGZUvwSuaN1GDgU4LkZOxu/gYn0Z8hMAC1EkwG5l5CR8w8syudUnwQWls34uY57NpxjwdZIyMpPd0oxFAE/igArAELeR0QO4JkHW7QPY4ytF3goW7A7/AaCTIvI6YRb+UKpRaloNmbny+5PXTVOk9ztOUMb4B9QTX69TRi5ZQwQ/pFfF6XXNcJbY6Dg+oIJsm74GyZDxODwsQUbBlwFSJcitrbgTITSQvy075FM8wEmZkt1TUDZlKrR/AcvoxZvN+PKUo7HcuwoeRIrSZ/DT7o8ATygj28QgQ/4EYJ4UGT16n1tyBOQVtBMh7XWoCFdC5tqvmivXJuawH82T9/Y0lvMWn1AkUaYVFqmPAM7Y1FTfHMgLIBeDbVaYDLliDZPeEuSG2ENXFCZDRk9XQNVAG3KjUtqJ6KNdrIRMljq4q7e7X0FF2CTPeYvlrOITckA2+OTIfqfJfMJkJMBH3PRvAmtb18ZyKZ0Hb1fhNekFJEdGCXgIRQvISXwnQsEPoLC+AjKZqs/aR9wCBFVrvDzrJZbDLCi8slsca1/tSsH6jEhd+5uByk5+FDpHFuRsd2SPjBbiBaQJjxzwK1RN4trHg3amAjLRzOrY365e+JEW8qx4lrOFT8C/D0507Mn4nvi4bR+JflkW4hLy9WQiB3g90Q5Zg50cp05ydzFR0n6uTvEtZyjcrjCUr9lljWRZX9qQLc4sqR1AZ1EsO6Q69QduLFIN8uFBCyVkVOsMbYxMWpek7Y9RHMtXFG53v3zA2uR1lsXiwlecjWWiQuTxPm9sef07iEknK+QHKiAXRwsSJZ6+xuPogiIyanqLR8ZL0yah/QHYA6tRmrGLkIOhPNou71OR0UPF7GzGJjIIa++tOftaZGHgDjnF4SJFmrAha44AvKyIjLo84JBx5xe5arGOFae4LtdxMJQfscs7zLTsEF6zcLYuc7ISq4q+qEmFYNTRJRtr9VrXkVFnC9wNVkRG8VaC3I1TVZBNM9yjqH11UR/K9p2+VgWfxZqOUdO+9Poeom+19Xp9PdRYr5e4jZ7S64mdGqDXPyak9dCLBDfhK8rsotfjfSYoVq/HD66OXt/G1hTOQqiFXi+eb3W4BUUde4zd3R5UH8oj5KvXWDUd21M9nMSS+lz1TcIrdi0wk/kOs3aXq1lSnopM7OVMeam+wlCKkGfFspzJLOWCmr3ssX5s4hWRb4eZL6zkdvbyT3zOMaZ6N1X1ingsMumXcg/zcYa8QV4/gc+gCw6V11R9Xx6LTDycR2VhGQtDniSr3qGES696Xkg6qurh9Fhk6sfuICnUXxjK7aW1G1/jiQW3Imqv7sf23JgUiVZIdz8vFmxljZT4PJdcMkSiYahFKzwXmcSkHjYRF2KeEtgmqdsum9/OKtos0aRMPSbl4ZFHsZ+5fhVDThTP1a+VcnGMBQGi1BUOIo82FapXpK9nIdP4smg0DxSGclcb8MCznGKdJtmY3MFRfFmsKpesae1JyHQXwSGbiytZ2H7OpqV273DzVnFKpHSVPuRoF4HUcC2M9SRkulfkDaFMBrvLXcg/NHrArI3MtDF2lE5n6A2He0UALvNGb89ReKXPCfQgZGo4PYzmizRwEF6+/9Vokbc7+qHDHUFif4sOM/9F+PY89t31Fb7xu3I5wcpvB5PppMit+pnJ9BK96Iez+1cXMt33lc3v3xzmMKAORSuYetow2/G+L4mLaZwocofIeNhjb6kSMXMrhk3VCSqF3ziDfi/O3l9dyNzuvoO1BMvIoZS+R+ffQGJhljnYfS9BxjbnDHbdnTbTWYS8T3BcE6vuFbwJWKiIw3VLBLtc4vL4Y8jcHk5us/EF4X3ijnS/RAn6SCjbt+poD6cEOV2IbiD0NZQ9C7BehBwvDYjcg6pm7MvPYOVCixugQi84DasBmdO4tgfQ2J5EwfZt1Lbfq8tOVUmYr4UHON+pC3Ce+d3apjJHHZaWFrw35QBUNlNDRvOY5xOHIgC+oRfNKrHvZS9YWlYbMrcf+1Aj9LLAJVGqGr9fIGbOPOR8P7a0Z+xjZx1QCunUeMb4RBX5kUq4zSsv+Lb6sGhULInppFQbMt9Rs6NT2T3elVUNTZf3bye77qWFK+bxK1yDEjhATntBUX01ZLSZJYWUw3lOJSwi9p72BpQ0qDZkdrZCeJlpdu6BJVIIZ2cr8ObfeF4mpBQJo+BdgKH4YzaNnshnbH70P8li0rNYoHYm586dJZ74/zAyO0HDZKJ97X+J852eoJFMX82yeU+q7g7n1m1cTqInKsjoLFhbkdjDNSig64jfTbhFgpcNSuGuf/Uhs3NSvLRR8OhftgWTXDgnJQn94Ojdp3zEgTvOs5a5VjHy6kReRtm8L8QkjWOW6WjmRcUbJSZUJzI7Dafo9iIyWJi+XDkNJ0FuQhRY3JWyoKwhcxye16iMZRSQD/d0dAsE55Y+B+WNOec9wCVtdSLbzjzCCTvnJmo+46RbZx4lyDgg8R3+eAEr28mc4JBKfzVkEj8dgZpaYCuna+JXwNfCk8LAakUWn2y9mDohhp1sbdjDsOqSuydbJchTuT76o2S+2KuK3NyClUscV3iaftslqXWompFl55eLTOcyLpiKf9f5ZTFy7G8A2HDpyil1nJRytrYiMu7T0DGH367WUVare3UjOz6lHunyb+EubOBlynoLp0TghXCQUGA65zXGyJ8ZBGluU7tyWRRorTgeMlXdD/MHkKvpfxFIZTmu28Ii2t+G6hWBpbnMkrK9cLIZjdtH80gF3LD9cO0CqGr1X0AmIvuPE0PdjcKIOKy5G3uSpKXSMMFSaiWpIL8KbB/NQqkXboF7sQLv/xXxInuRvcheZC+yF9mL7EX+X8h/ANQnOXhVhQjiAAAAAElFTkSuQmCC" alt="Financial Advisor Katerina Baeva">
+      <div class="doc-badge">Бонус к вебинару</div>
+    </header>
+
+    <!-- INTRO -->
+    <section class="intro-section">
+      <img src="data:image/jpeg;base64,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" alt="Катерина Баева" class="intro-photo">
+      <div class="intro-content">
+        <h1>Чек-лист «Оценка финансового благополучия»</h1>
+        <div class="subtitle">Экспресс-диагностика личных финансов от Катерины Баевой</div>
+        <p>Данный чек-лист изначально был создан мной для одного бизнес-сообщества, членом которого я являюсь. Чек-лист отражает мой подход к данному вопросу, хотя я его немного сократила (изначально в нем было 25 вопросов). Он позволит вам провести самодиагностику, определить области, требующие развития и свой текущий уровень.</p>
       </div>
-      <h1 class="hero__title">Как запланировать финансовое благополучие</h1>
-      <p class="hero__subtitle">Разберём, как за текущий доход собрать понятный финансовый план: бюджет, цели и инвестиции.</p>
+    </section>
+
+    <div class="section-heading">20 критериев финансового благополучия</div>
+
+    <!-- ВОПРОС 1 -->
+    <div class="question-card" id="card-1">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №1</span>
+        <label class="card-score" for="q1" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q1" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-1">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">У меня есть долгосрочные финансовые цели (5+ лет), которые в том числе включают пенсию.</div>
+        <div class="comment-text">Если у вас есть описанные долгосрочные финансовые цели, которые ограничиваются не только покупкой стиральной машинки и отпуском, но чем-то более глобальным, например, пенсией это отлично. <br><br>Можете прибавить себе 1 балл (если нет, то 0) и самое время подумать про свои финансовые цели <br><br>Кстати сказать, именно про формирование пенсионного капитала люди часто забывают, отдавая приоритет более близким целям, например обучению детей.  Поэтому рекомендую обязательно включить формирование пенсионного капитала в список ваших целей.  <br><br>Для расчета размера пенсионного капитала вам может помочь табличка, которую можно запросить в моем отделе службы заботы о клиентах.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 2 -->
+    <div class="question-card" id="card-2">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №2</span>
+        <label class="card-score" for="q2" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q2" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-2">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">
+          Мои долгосрочные финансовые цели формализованы и достижимы, цели записаны:
+          <ul class="question-list">
+            <li>до цели есть конкретное (фиксированное) количество лет;</li>
+            <li>сумма, которую я откладываю (или планирую откладывать) на цель реальна с учетом других моих расходов;</li>
+            <li>доходность, которую я закладываю 8% годовых в долларах;</li>
+            <li>указаны инструменты и стратегии, которые я использую для достижения целей.</li>
+          </ul>
+        </div>
+        <div class="comment-text">Если ваши цели не описаны, либо заложен слишком оптимистичный вариант по доходности/отчислениям на цели, то у вас пока еще не цели, а мечты. И надо немного поработать над их актуализацией и выбором приоритетных. <br><br>Для этого вам может помочь табличка с расчетом целей, которую можно попросить у отдела моей службы заботы о клиентах.<br><br>Если у вас все цели формализованы, то можете прибавить себе 1 балл. Если нет, то пока запишите в свою копилку 0.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 3 -->
+    <div class="question-card" id="card-3">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №3</span>
+        <label class="card-score" for="q3" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q3" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-3">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Минимум раз в год вы проводите актуализацию своих финансовых целей и смотрите результаты по их достижению.</div>
+        <div class="comment-text">Данная оценка позволяет вам не только актуализировать свои цели, но и учитывать результаты инвестирования, инфляцию, меняющийся доход (к примеру, пенсионный капитал стоит рассчитывать исходя из текущего дохода), меняющиеся цены на недвижимость и обучение и другие жизненные приоритеты. <br><br>Один из частых вопросов, которые я получаю, почему при первоначальном расчете я не учитываю инфляцию. Мой ответ -  я ее учитываю при ежегодном пересмотре и актуализации целей. И тут инфляция – это не какой-то усредненный макроэкономический показатель, тут мы учитываем показатель личной инфляции и изменение стоимости личных целей. К примеру, стоимость обучение может расти гораздо быстрее инфляции, а желаемый объект недвижимости наоборот может подешеветь.<br><br>Если вы проводите подобную оценку, то смело можете начислить себе 1 балл. Если нет, то пока в вашу копилку не прибавится баллов, но это всегда можно исправить, особенно если достижимые и формализованные цели есть.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 4 -->
+    <div class="question-card" id="card-4">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №4</span>
+        <label class="card-score" for="q4" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q4" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-4">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Я трачу меньше, чем зарабатываю.</div>
+        <div class="comment-text">Тратить меньше, чем зарабатывать, а дельту инвестировать – это основной секрет богатство. Внедрение данного секрета вполне заслуживает 1 балла.<br>Куда же можно инвестировать эту дельту абсолютно любого размер по понятному алгоритму (мой взгляд на вопрос), можно узнать на курсе.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 5 -->
+    <div class="question-card" id="card-5">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №5</span>
+        <label class="card-score" for="q5" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q5" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-5">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Я регулярно откладываю не меньше 10% от дохода в счет своей будущей финансовой независимости. Или у меня уже сформирован капитал, генерирующий пассивный доход, достаточный для обеспечения дохода в размере минимум 40% от моего текущего дохода.</div>
+        <div class="comment-text">Если вы откладываете на резервный фонд и/или будущую финансовую независимость не менее 10% от дохода, это отлично. Можете добавить в свою копилку 1 балл.<br><br>Если нет, то рекомендую начать. Можно начать и с 1% от дохода, самое главное внедрить привычку. Очень помогает автоматизация процесса, а также если откладывать сразу после получения денег, а не пытаться выкроить % от того, что осталось в конце месяца. Определите свой процент и можете начать буквально в ближайший приход денег.<br><br>А куда инвестировать эти отложенные деньги, я расскажу на курсе.<br>Если вам кажется, что данный пункт отличается от предыдущего, регулярностью процесса отчислений в счет вашей финансовой независимости, а не просто, что вы живете «по средствам».</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 6 -->
+    <div class="question-card" id="card-6">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №6</span>
+        <label class="card-score" for="q6" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q6" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-6">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Я хорошо представляю, куда трачу деньги и сколько зарабатываю.</div>
+        <div class="comment-text">Если вы ведете учет доходов  и расходов, а также ежемесячный анализ, то можете смело начислить себе еще 1 балл. <br>Если нет, то скорее всего точного понимания, куда уходят деньги и возможно сколько вам приходит, у вас нет.  Рекомендую хотя бы на пару месяцев внедрить привычку ведения расходов и доходов, это очень поможет вам и при планировании целей.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 7 -->
+    <div class="question-card" id="card-7">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №7</span>
+        <label class="card-score" for="q7" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q7" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-7">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">У меня нет кредитов.</div>
+        <div class="comment-text">Наличие кредитов, особенно долгосрочных может значительно ухудшить ваше финансовое положение в каких-то форс-мажорных ситуациях. В этом вопросе если исключения, если кредит взят, например, у родственников без процентов или под какой-то льготный процент, и сам кредит может быть погашен очень быстро с текущего дохода.<br>Итак, если у вас нет кредитов, то можете начислить себе 1 балл.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 8 -->
+    <div class="question-card" id="card-8">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №8</span>
+        <label class="card-score" for="q8" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q8" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-8">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Мои выплаты по кредитам не превышают 30% от дохода.</div>
+        <div class="comment-text">Считается, что 30% это тот «комфортный» максимум, который не создает большой нагрузки на бюджет семьи, поэтому если у вас нет кредитов или выплаты по кредиту составляют менее 30% от дохода, то прибавьте 1 балл в копилку результата.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 9 -->
+    <div class="question-card" id="card-9">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №9</span>
+        <label class="card-score" for="q9" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q9" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-9">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Я не пользуюсь кредитными картами, а если пользуюсь, то всегда укладываюсь в льготный период.</div>
+        <div class="comment-text">Большинству людей не удается укладываться в льготный период, и они плотно садятся на «кредитную иглу».  Стоит иметь в виду, что кредиты по кредитным картам самые дорогие кредиты, которые крайне вам невыгодны. <br>Но небольшой процент финансово дисциплинированных людей способен укладываться в льготный период и пользоваться им, не попадая в ловушку к банку.<br>Поэтому если вы не пользуетесь кредитными картами или имея свободные деньги, пользуетесь преимуществами льготного периода, погашая все строго в срок, то прибавляйте 1 балл, в противном случае дополнительных баллов не добавляется.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 10 -->
+    <div class="question-card" id="card-10">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №10</span>
+        <label class="card-score" for="q10" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q10" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-10">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Я не являюсь поручителем по кредитам.</div>
+        <div class="comment-text">Поручительство по кредиту является в некоторой степени бомбой замедленного действия, которая непонятно когда взорвется, и может резко ухудшить стабильность вашего финансового положения. <br>Если у вас нет поручительства, то прибавьте 1 балл.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 11 -->
+    <div class="question-card" id="card-11">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №11</span>
+        <label class="card-score" for="q11" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q11" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-11">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">У меня есть кредит и моя жизнь застрахована на сумму кредита.</div>
+        <div class="comment-text">Если у вас нет кредита, то прибавьте 1 балл себе в копилку.<br>При наличии кредита и наследников моя рекомендация иметь страховку с покрытием минимум на сумму кредита, чтобы при неблагоприятном развитие событий, ваши наследники не получили выплату по кредиту «в подарок». При этом хочу обратить внимание, что выбор страховой программы и страховой компании это отдельная, очень серьезная задача. В 99% случаев, я бы не рекомендовала программы накопительного страхования жизни, а  отдать предпочтение классическому страхованию жизни, по аналогии с тем, как вы страхуете машину.<br>Если вы ответственно подошли к вопросу и имея кредит, имеете еще и страховку жизни, то прибавьте себе 1 балл за заботу о наследниках.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 12 -->
+    <div class="question-card" id="card-12">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №12</span>
+        <label class="card-score" for="q12" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q12" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-12">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Моя квартира и машина застрахованы, включая ответственность за ущерб третьим лицам.</div>
+        <div class="comment-text">Проблемы с машиной или квартирой, особенно если вы являетесь виновником происшествия, может серьезно повлиять на ваше финансовое состояние. Поэтому я рекомендую обязательно включить в страховку хорошее покрытие потенциально ущерба нанесенного по вашей вине третьим лицам. К примеру, на случай если вы зальете соседей и будете вынуждены компенсировать стоимость ремонта владельцам квартир под вами. Покрытие определять индивидуально.<br>Если вы уже позаботились о страховках, то начислите себе 1 балл.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 13 -->
+    <div class="question-card" id="card-13">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №13</span>
+        <label class="card-score" for="q13" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q13" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-13">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">У меня есть резервный фонд в размере 3-6 месячных расходов семьи.</div>
+        <div class="comment-text">Если у вас нет резервного фонда, то вы находитесь в крайне уязвимом положении. Хранить резервный фонд я рекомендую на депозитах системно-значимых облигациях и/или надежных облигациях. Про облигации, подходящие под резервный фонд, я буду рассказывать на курсе.<br><br>Если вы позаботились о резервном фонде, то прибавляйте 1 балл в свою копилку.<br><br>Про резервный фонд хочу добавить еще такой комментарий, периодически встречаю рекомендацию, что резервный фонд должен быть 12+ месяцев. Мое мнение, что за редкими исключениями такой размер резервного фонда избыточный.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 14 -->
+    <div class="question-card" id="card-14">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №14</span>
+        <label class="card-score" for="q14" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q14" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-14">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Я знаю про все возможные налоговые вычеты и другие льготы, которые мне положены и активно пользуюсь ими.</div>
+        <div class="comment-text">Если вы с ходу можете рассказать, про стандартные, социальные, имущественные и инвестиционные вычету и пользуетесь ими, это замечательно. Ведь это, по сути, деньги «из воздуха». За этот полезный навык вы можете начислить себе в копилку 1 балл.<br><br>Про инвестиционные налоговые вычеты мы подробно поговорим на курсе.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 15 -->
+    <div class="question-card" id="card-15">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №15</span>
+        <label class="card-score" for="q15" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q15" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-15">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">У меня есть несколько независимых источников доходов.</div>
+        <div class="comment-text">Если это про вас, то можете добавить 1 балл к оценке своего финансового благополучия.<br>А вот как начать создавать капитал, который в будущем может стать таким источником пассивного дохода, мы узнаем на курсе.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 16 -->
+    <div class="question-card" id="card-16">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №16</span>
+        <label class="card-score" for="q16" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q16" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-16">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Я инвестирую деньги не только в свой бизнес, только в недвижимость, депозиты или доллары. У меня есть диверсифицированный портфель.</div>
+        <div class="comment-text">Выбор только одного «любимого» инструмента, может создать серьезный перекос по риску или доходности, поэтому я рекомендую выбирать не только депозиты или недвижимость, но и инструменты фондового рынка, такие как ETF (биржевые фонды).<br>Если у вас уже есть портфель на фондовом рынке, состоящий из биржевых фондов, то можете добавить себе 1 балл. А если все ваши деньги хранятся только на депозитах, а при слове инвестиции у вас возникает в голове только инвестиционная недвижимость, то приглашаю на свой курс, на котором я расскажу, как создавать капитал пассивно из биржевых фондов.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 17 -->
+    <div class="question-card" id="card-17">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №17</span>
+        <label class="card-score" for="q17" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q17" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-17">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Я инвестирую деньги на длительный срок 5+ лет.</div>
+        <div class="comment-text">Если вы не готовы инвестировать деньги на длительный срок, то ваши шансы на успех от инвестиций на фондовом рынке невелики. При увеличении срока инвестирования, ваши шансы на успех серьезно увеличиваются.<br>Если вы уже инвестируете на длительный срок, то прибавьте себе 1 балл.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 18 -->
+    <div class="question-card" id="card-18">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №18</span>
+        <label class="card-score" for="q18" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q18" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-18">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">У меня есть инвестиции за границей, которые полностью не зависят от России.</div>
+        <div class="comment-text">Если это про вас, то вы значительно снижаете риски полной потери капитала. И можете добавить 1 балл.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 19 -->
+    <div class="question-card" id="card-19">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №19</span>
+        <label class="card-score" for="q19" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q19" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-19">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Я общаюсь с людьми, которые инвестируют в течение длительного срока (5+ лет) и успешно.</div>
+        <div class="comment-text">По своему опыту знаю, что очень сложно противостоять окружению, если они не разделяют вашу точку зрения. Шансы на успех значительно увеличиваются, если вы находитесь в успешном окружении, которые уже инвестируют на длительный срок и успешно, то можете добавить 1 балл.<br><br>Поэтому если среди людей, с которыми вы общаетесь, нет таких примеров для подражания, то я рекомендую заняться поиском данного поддерживающего окружения. <br><br>Если вы пойдете на курс, то таким поддерживающим окружением на курсе будет ваш куратор или я.</div>
+      </div>
+    </div>
+
+    <!-- ВОПРОС 20 -->
+    <div class="question-card" id="card-20">
+      <div class="card-top">
+        <span class="card-num">УТВЕРЖДЕНИЕ №20</span>
+        <label class="card-score" for="q20" title="Отметить выполнение (1 балл)">
+          <input type="checkbox" id="q20" class="score-checkbox" onchange="updateScore()">
+          <span class="score-label-text">Мой балл:</span>
+          <span class="score-box" id="box-20">0</span>
+        </label>
+      </div>
+      <div class="card-body">
+        <div class="question-text">Я регулярно обсуждаю с семьей финансовые планы, бюджет расходов, инвестиции и результаты инвестиций.</div>
+        <div class="comment-text">Если данное утверждение про вас, то добавьте 1 балл.<br>А если нет, то хочу напомнить, что финансовые проблемы являются одной из причин разводов и разногласий в семейной жизни, поэтому рекомендую внедрить такую практику в вашу семью.<br><br>Мои клиенты очень часто приходят на консультацию семьями, и я очень поддерживаю эту практику.</div>
+      </div>
+    </div>
+
+    
+    <!-- БЛОК ПОДСЧЕТА БАЛЛОВ -->
+    <div class="score-summary-card" id="score-summary-block">
+      <div class="score-summary-badge">Подсчет баллов в реальном времени</div>
+      <div class="score-summary-flex">
+        <div class="score-number-wrapper">
+          <div class="score-big-num">
+            <span id="total-score">0</span><span class="score-max-num"> / 20</span>
+          </div>
+          <div class="score-points-word" id="score-word-val">баллов</div>
+        </div>
+        <div class="score-details-wrapper">
+          <div class="score-progress-bar-bg">
+            <div class="score-progress-bar-fill" id="score-progress-bar" style="width: 0%;"></div>
+          </div>
+          <div class="score-status-title" id="score-status-title">Отметьте выполненные пункты</div>
+          <div class="score-status-desc" id="score-status-desc">
+            Поставьте галочки напротив критериев, которые уже внедрены в вашей жизни. Сумма баллов рассчитается автоматически.
+          </div>
+        </div>
+      </div>
+      <div class="score-actions-row">
+        <button type="button" class="score-btn-reset" onclick="resetAllScores()">Сбросить все отметки</button>
+        <a href="#results" class="score-btn-jump">Перейти к итогам и стратегии ↓</a>
+      </div>
+    </div>
+
+    <!-- ИТОГИ -->
+    <div class="results-block" id="results">
+      <h2>Подведем итоги: стратегия по результатам</h2>
+      <p>Посчитайте сколько у вас баллов и определите, на чем в первую очередь стоит сконцентрироваться:</p>
+      <ol>
+        <li id="rec-step-1"><strong>Если у вас пока нет резервного фонда (подушки безопасности):</strong> даже если есть кредит, в первую очередь стоит начать формировать резервный фонд, хотя бы на 3 месячных расхода семьи. И сразу можно потренироваться и разместить часть резервного фонда на брокерском счету, а не на депозите.</li>
+        <li id="rec-step-2"><strong>Если у вас уже есть резервный фонд, но не погашен кредит:</strong> стоит сконцентрироваться на досрочном погашении кредита. Но опять же можно организовать небольшой тренировочный портфель, чтобы к моменту погашения кредита уже понимать, как это работает.</li>
+        <li id="rec-step-3"><strong>Если же у вас сформирован резервный фонд и нет кредитов:</strong> самое время начать инвестировать.</li>
+      </ol>
+      <div class="social-share">
+        <p style="margin-bottom:6px;">Я буду очень рада, если вы поделитесь своими результатами по кол-ву баллов в соцсетях, вопросами и комментариями по данному чек-листу со мной в моем Telegram-канале «Катя Баева про финансы»: <a href="https://t.me/BaevaFinance" target="_blank" rel="noopener noreferrer">@BaevaFinance</a></p>
+        <p style="margin:0; font-weight:700; color:var(--primary);">У меня 20 баллов, а сколько у вас?</p>
+      </div>
+    </div>
+
+    <!-- КУРС -->
+    <div class="course-card">
+      <div class="course-date">Старт потока 20 ноября</div>
+      <h3>Практический курс «Пассивные инвестиции на российском фондовом рынке»</h3>
+      <p>Практическая пошаговая программа создания капитала из биржевых фондов и облигаций с нуля. Вы составите персональный инвестиционный план, откроете брокерский счет и соберете устойчивый портфель под ваши цели.</p>
+      <a href="http://pay.baeva.finance/buy/kurs-passivnye-investicii-na-rossiiskom-rynke" target="_blank" rel="noopener noreferrer" class="btn-buy">Иду на курс</a>
+    </div>
+
+    <!-- КОНТАКТЫ -->
+    <footer class="contacts-footer">
+      <h4>Контакты:</h4>
+      <div class="contacts-grid">
+        <div><strong>Сайт:</strong> <a href="https://baeva.finance/" target="_blank">baeva.finance</a></div>
+        <div><strong>Email:</strong> <a href="mailto:office@baeva.finance">office@baeva.finance</a></div>
+        <div><strong>Telegram-канал:</strong> <a href="https://t.me/BaevaFinance" target="_blank">@BaevaFinance</a></div>
+      </div>
+    </footer>
+
+  </div>
+
+
+    <!-- ПЛАВАЮЩИЙ СЧЕТЧИК БАЛЛОВ -->
+    <div class="floating-score-bar" id="floating-bar">
+      <div class="floating-score-content">
+        <span class="floating-label">Баллы:</span>
+        <span class="floating-score"><strong id="floating-score-val">0</strong> / 20</span>
+      </div>
+      <a href="#score-summary-block" class="floating-btn">К итогам ↓</a>
+    </div>
+
+  <script>
+    function updateScore() {
+      let total = 0;
+      const totalQuestions = 20;
       
-      <div class="hero__meta">
-        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="2">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-          <line x1="16" y1="2" x2="16" y2="6"></line>
-          <line x1="8" y1="2" x2="8" y2="6"></line>
-          <line x1="3" y1="10" x2="21" y2="10"></line>
-        </svg>
-        <span>6 ноября, пятница 19:00 МСК · онлайн · участие бесплатное</span>
-      </div>
+      const q7Checked = document.getElementById('q7') ? document.getElementById('q7').checked : false;
+      const q13Checked = document.getElementById('q13') ? document.getElementById('q13').checked : false;
 
-      <div class="hero__actions">
-        <a href="#register" class="btn-white">Зарегистрироваться</a>
-        <p class="hero__note">Ссылка на вебинар придёт на почту сразу после регистрации.</p>
-      </div>
-    </div>
-  </header>
-
-  <!-- 2. РЕГИСТРАЦИЯ -->
-  <section class="register-section" id="register">
-    <div class="container reg-grid">
-      <div class="reg-info">
-        <h2 class="reg-info__title">Регистрация на вебинар</h2>
-        <p class="reg-info__lead">Оставьте данные — и мы пришлём ссылку на вебинар «Как запланировать финансовое благополучие».</p>
-
-        <div class="session-box">
-          <p class="session-box__label">Ближайший сеанс</p>
-          <p class="session-box__date">
-            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            <span>пятница, 6 ноября 19:00 МСК</span>
-          </p>
-        </div>
-
-        <ul class="benefits-list">
-          <li class="benefits-list__item">
-            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="2">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            <span>Письмо со ссылкой — сразу после регистрации</span>
-          </li>
-          <li class="benefits-list__item">
-            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="2">
-              <line x1="22" y1="2" x2="11" y2="13"></line>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>
-            <span>Напомним в Telegram — укажите ваш юзернейм</span>
-          </li>
-          <li class="benefits-list__item">
-            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
-            <span>6 ноября, пятница — участие бесплатное</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- КАРТОЧКА ФОРМЫ / УСПЕШНОЙ ОТПРАВКИ -->
-      <div class="reg-card">
-        <h3 class="reg-card__title" id="form-card-title">Заполните форму</h3>
-
-        <!-- Сама форма -->
-        <form id="reg-form" class="reg-form">
-          <div class="reg-form__group">
-            <label class="reg-form__label" for="reg-username">Имя <span class="reg-form__req">*</span></label>
-            <input class="reg-form__input" type="text" id="reg-username" name="username" placeholder="Как к вам обращаться" required>
-          </div>
-
-          <div class="reg-form__group">
-            <label class="reg-form__label" for="reg-email">Email <span class="reg-form__req">*</span></label>
-            <input class="reg-form__input" type="email" id="reg-email" name="email" placeholder="you@example.com" required>
-          </div>
-
-          <div class="reg-form__group">
-            <label class="reg-form__label" for="reg-telegram">Telegram <span class="reg-form__optional">(необязательно)</span></label>
-            <input class="reg-form__input" type="text" id="reg-telegram" name="telegram" placeholder="@username">
-            <p class="reg-form__hint">Укажите ваш логин, чтобы получать напоминания в боте.</p>
-          </div>
-
-          <button type="submit" class="reg-form__submit">Зарегистрироваться</button>
-          <p class="reg-form__consent">Нажимая кнопку, вы соглашаетесь на <a href="https://baeva.finance/subscription/20-root/44-politica-konfidentsialnosti" target="_blank" rel="noopener noreferrer">обработку персональных данных</a></p>
-
-          <div class="error reg-form__message"></div>
-        </form>
-
-        <!-- Блок, который появляется вместо формы после успешной регистрации -->
-        <div id="success-box" class="success-box">
-          <div class="success-box__icon">✓</div>
-          <h4 class="success-box__title">Регистрация прошла успешно!</h4>
-          <p class="success-box__text">Чтобы получить ссылку на эфир и уведомления подтвердите участие по ссылке в письме.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. ПРОГРАММА -->
-  <section class="program-section">
-    <div class="container">
-      <h2 class="section-title">Что разберём на вебинаре</h2>
-      <p class="section-lead">Четыре практических блока: разберем реальные ситуации и соберем схему, который можно применить сразу.</p>
-
-      <div class="program-grid">
-        <div class="program-item">
-          <svg class="program-item__icon" viewBox="0 0 24 24" fill="none" stroke-width="2">
-            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-          </svg>
-          <h3 class="program-item__title">Бюджет, который работает</h3>
-          <p class="program-item__text">Оценим текущее финансовое состояние и определим слабые места.</p>
-        </div>
-
-        <div class="program-item">
-          <svg class="program-item__icon" viewBox="0 0 24 24" fill="none" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="2" y1="12" x2="22" y2="12"></line>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-          </svg>
-          <h3 class="program-item__title">Цели с датами и суммами</h3>
-          <p class="program-item__text">Переведем «прекрасно жить» в числа: посчитаем крупные цели и определим дату.</p>
-        </div>
-
-        <div class="program-item">
-          <svg class="program-item__icon" viewBox="0 0 24 24" fill="none" stroke-width="2">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-          </svg>
-          <h3 class="program-item__title">Накопления и финансовая подушка</h3>
-          <p class="program-item__text">Подберем подходящие финансовые инструменты под разные цели.</p>
-        </div>
-
-        <div class="program-item">
-          <svg class="program-item__icon" viewBox="0 0 24 24" fill="none" stroke-width="2">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
-          <h3 class="program-item__title">Защита финансового плана</h3>
-          <p class="program-item__text">Посмотрим, что может разрушить план, и как подготовиться к рискам.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. СПИКЕР -->
-  <section class="speaker-section">
-    <div class="container speaker-grid">
-      <img src="images/katya-baeva.jpg" alt="Катя Баева" class="speaker-photo">
-      
-      <div class="speaker-info">
-        <p class="speaker-role">Ведущая вебинара</p>
-        <h2 class="speaker-name">Катя Баева</h2>
-        <div class="speaker-bio">
-          <p>Финансовый консультант. Помогает семьям выстроить рабочий бюджет, определить финансовые цели и спокойно двигаться к ним.</p>
-          <p>На вебинаре — только практика: разберём типичные ситуации и соберём план, который можно применить уже на следующей неделе.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. КАК ПРИСОЕДИНИТЬСЯ -->
-  <section class="steps-section">
-    <div class="container steps-grid">
-      <div>
-        <h2 class="section-title">Как присоединиться к вебинару</h2>
+      for (let i = 1; i <= totalQuestions; i++) {
+        const checkbox = document.getElementById('q' + i);
+        const card = document.getElementById('card-' + i);
+        const box = document.getElementById('box-' + i);
         
-        <div class="steps-list" style="margin-top: 36px;">
-          <div class="step-item">
-            <div class="step-num">1</div>
-            <div>
-              <h3 class="step-title">Зарегистрируйтесь</h3>
-              <p class="step-desc">Оставьте имя и почту в форме выше — это займет меньше минуты.</p>
-            </div>
-          </div>
-
-          <div class="step-item">
-            <div class="step-num">2</div>
-            <div>
-              <h3 class="step-title">Получите письмо со ссылкой</h3>
-              <p class="step-desc">Сразу после регистрации отправим письмо со ссылкой на трансляцию.</p>
-            </div>
-          </div>
-
-          <div class="step-item">
-            <div class="step-num">3</div>
-            <div>
-              <h3 class="step-title">Подключитесь в пятницу</h3>
-              <p class="step-desc">6 ноября перейдите по ссылке — участвовать можно с телефона или компьютера.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <img src="images/workspace.jpg" alt="Рабочее место" class="steps-img">
-    </div>
-  </section>
-
-  <!-- ПОДВАЛ -->
-  <footer class="footer">
-    <div class="container">
-      <p style="margin-bottom: 12px;">© 2026 Катя Баева. Все права защищены.</p>
-      <p>
-        <a href="#register">Регистрация</a>
-        <a href="#">Политика конфиденциальности</a>
-        <a href="#">Отказ от ответственности</a>
-      </p>
-    </div>
-  </footer>
-
-<!-- СКРИПТ BIZON365 С ПРИНУДИТЕЛЬНЫМ СКРЫТИЕМ ЧЕРЕЗ СОБЫТИЕ SUBMIT -->
-  <script type="text/javascript" src="https://static.bizon365.ru/form/anyform.min.js"></script>
-  <script type="text/javascript">
-    (function() {
-      // Инициализация Бизона
-      if (typeof $bizon_init_form === 'function') {
-        $bizon_init_form({
-          selectors: {
-            form: '#reg-form',
-            message: '.error'
-          },
-          form_fields: {
-            email: 'input[name="email"]',
-            phone: { el: 'input[name="telegram"]', required: false },
-            username: 'input[name="username"]'
-          },
-          pageId: '210636:webinar-finblag',
-          closestDateOnly: true,
-          redirectUrl: '',
-          successMessage: 'Регистрация прошла успешно! Подтвердите вашу почту по ссылке в письме.',
-          allowFormAction: false
-        });
+        if (checkbox && checkbox.checked) {
+          total += 1;
+          if (box) box.textContent = '1';
+          if (card) card.classList.add('is-checked');
+        } else {
+          if (box) box.textContent = '0';
+          if (card) card.classList.remove('is-checked');
+        }
       }
 
-      // Принудительное скрытие формы при нажатии на кнопку отправки
-      var form = document.getElementById('reg-form');
-      if (form) {
-        form.addEventListener('submit', function() {
-          // Небольшая задержка, чтобы Бизон успел забрать данные из полей перед скрытием
-          setTimeout(function() {
-            var emailInput = document.getElementById('reg-email');
-            // Если email заполнен, считаем отправку успешной и переключаем блоки
-            if (emailInput && emailInput.value.trim() !== '') {
-              form.style.display = 'none';
-              var cardTitle = document.getElementById('form-card-title');
-              var successBox = document.getElementById('success-box');
-              if (cardTitle) cardTitle.style.display = 'none';
-              if (successBox) successBox.style.display = 'block';
-            }
-          }, 400);
-        });
+      // Update total display
+      const totalScoreEl = document.getElementById('total-score');
+      const floatingScoreEl = document.getElementById('floating-score-val');
+      const progressBar = document.getElementById('score-progress-bar');
+      const statusTitle = document.getElementById('score-status-title');
+      const statusDesc = document.getElementById('score-status-desc');
+      const scoreWord = document.getElementById('score-word-val');
+
+      if (totalScoreEl) totalScoreEl.textContent = total;
+      if (floatingScoreEl) floatingScoreEl.textContent = total;
+
+      const percent = Math.round((total / totalQuestions) * 100);
+      if (progressBar) progressBar.style.width = percent + '%';
+
+      // Grammatical ending in Russian for "балл"
+      function getScoreWord(n) {
+        if (n % 10 === 1 && n % 100 !== 11) return 'балл';
+        if ([2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100)) return 'балла';
+        return 'баллов';
       }
-    })();
+      if (scoreWord) scoreWord.textContent = getScoreWord(total);
+
+      // Status text
+      if (statusTitle && statusDesc) {
+        if (total === 0) {
+          statusTitle.textContent = 'Отметьте выполненные пункты';
+          statusDesc.textContent = 'Поставьте галочки напротив критериев, которые уже внедрены в вашей жизни. Сумма баллов рассчитается автоматически.';
+        } else if (total <= 6) {
+          statusTitle.textContent = 'Начальный уровень финансовой устойчивости';
+          statusDesc.textContent = 'Есть базовые точки роста. Первоочередной шаг — формирование резервного фонда на 3 месяца и закрытие дорогих задолженностей.';
+        } else if (total <= 13) {
+          statusTitle.textContent = 'Хорошая основа для финансового роста';
+          statusDesc.textContent = 'У вас заложен надежный фундамент. Сейчас главное — настроить защиту от рисков и переходить к системным пассивным инвестициям.';
+        } else if (total <= 19) {
+          statusTitle.textContent = 'Высокий уровень финансового благополучия!';
+          statusDesc.textContent = 'Отличная финансовая дисциплина и диверсификация. Осталось докрутить отдельные параметры для максимальной защиты и роста капитала.';
+        } else {
+          statusTitle.textContent = 'Идеальный результат — 20 из 20!';
+          statusDesc.textContent = 'Поздравляем! Ваша финансовая система выстроена на уровне профессионального финансового советника.';
+        }
+      }
+
+      // Highlight recommendation in results
+      const rec1 = document.getElementById('rec-step-1');
+      const rec2 = document.getElementById('rec-step-2');
+      const rec3 = document.getElementById('rec-step-3');
+
+      [rec1, rec2, rec3].forEach(el => { if (el) el.classList.remove('highlighted-rec'); });
+
+      if (total > 0) {
+        if (!q13Checked) {
+          if (rec1) rec1.classList.add('highlighted-rec');
+        } else if (!q7Checked) {
+          if (rec2) rec2.classList.add('highlighted-rec');
+        } else {
+          if (rec3) rec3.classList.add('highlighted-rec');
+        }
+      }
+    }
+
+    function resetAllScores() {
+      if (confirm('Сбросить все отмеченные галочки?')) {
+        for (let i = 1; i <= 20; i++) {
+          const cb = document.getElementById('q' + i);
+          if (cb) cb.checked = false;
+        }
+        updateScore();
+      }
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', updateScore);
   </script>
+
 </body>
 </html>
